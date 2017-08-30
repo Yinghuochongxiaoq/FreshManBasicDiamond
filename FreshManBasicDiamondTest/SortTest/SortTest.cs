@@ -92,7 +92,7 @@ namespace FreshManBasicDiamondTest.SortTest
             sortList.ForEach(f => Debug.Write(f));
             sortList[4].IsEqualTo(20);
         }
-        
+
         /// <summary>
         /// 堆排序
         /// </summary>
@@ -100,6 +100,28 @@ namespace FreshManBasicDiamondTest.SortTest
         {
             var list = SortData;
             var sortList = Sort.MinHeapSort(list);
+            sortList.ForEach(f => Debug.Write(f));
+            sortList[4].IsEqualTo(17);
+        }
+
+        /// <summary>
+        /// 堆排序
+        /// </summary>
+        public void MaxHeapSortTest()
+        {
+            var list = SortData;
+            var sortList = Sort.MaxHeapSort(list);
+            sortList.ForEach(f => Debug.Write(f));
+            sortList[4].IsEqualTo(20);
+        }
+
+        /// <summary>
+        /// 基数排序
+        /// </summary>
+        public void RadixSortTest()
+        {
+            var list = SortData;
+            var sortList = Sort.RadixSort(list, 2, 10);
             sortList.ForEach(f => Debug.Write(f));
             sortList[4].IsEqualTo(20);
         }

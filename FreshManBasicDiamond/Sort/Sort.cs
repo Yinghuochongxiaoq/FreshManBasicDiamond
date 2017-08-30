@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
 
 namespace FreshManBasicDiamond.Sort
 {
@@ -346,10 +345,10 @@ namespace FreshManBasicDiamond.Sort
         }
         #endregion
 
-        #region [7、堆排序]
+        #region [7、小根堆排序]
 
         /// <summary>
-        /// 堆排序
+        /// 小根堆排序
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="list"></param>
@@ -413,6 +412,137 @@ namespace FreshManBasicDiamond.Sort
                 i = j;
                 j = 2 * i + 1;
             }
+        }
+        #endregion
+
+        #region [8、大根堆排序]
+        /// <summary>
+        /// 堆排序
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="list"></param>
+        /// <returns></returns>
+        public static List<T> MaxHeapSort<T>(List<T> list) where T : IComparable<T>
+        {
+            if (list == null || list.Count < 1) return list;
+            var n = list.Count;
+            MakeMaxHeap(list);
+            for (int i = n - 1; i > 0; i--)
+            {
+                T temp = list[0];
+                list[0] = list[i];
+                list[i] = temp;
+                MaxHeapFixdown(list, 0, i);
+            }
+            return list;
+        }
+
+        /// <summary>
+        /// 构建小根堆
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="list"></param>
+        private static void MakeMaxHeap<T>(List<T> list) where T : IComparable<T>
+        {
+            var n = list.Count;
+            for (int i = (n - 1) / 2; i >= 0; i--)
+            {
+                MaxHeapFixdown(list, i, n);
+            }
+        }
+
+        /// <summary>
+        /// 从i结点开始调整，n为结点总数，从0开始计算 i结点的子节点为2*i+1，2*i+2
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="list"></param>
+        /// <param name="i"></param>
+        /// <param name="n"></param>
+        private static void MaxHeapFixdown<T>(List<T> list, int i, int n) where T : IComparable<T>
+        {
+            //子节点
+            int j = 2 * i + 1;
+            while (j < n)
+            {
+                //在左右子节点中寻找最大的
+                if (j + 1 < n && list[j + 1].CompareTo(list[j]) == 1)
+                {
+                    j++;
+                }
+                if (list[i].CompareTo(list[j]) != -1)
+                {
+                    break;
+                }
+                //较小节点下移
+                var temp = list[i];
+                list[i] = list[j];
+                list[j] = temp;
+
+                i = j;
+                j = 2 * i + 1;
+            }
+        }
+        #endregion
+
+        #region [9、基数排序]
+
+        /// <summary>
+        /// 基数排序
+        /// </summary>
+        /// <param name="list">待排序数组</param>
+        /// <param name="bitWidth">最大数的位数</param>
+        /// <param name="baseNumber">基数10</param>
+        /// <returns></returns>
+        public static List<int> RadixSort(List<int> list, int bitWidth, int baseNumber)
+        {
+            //初始化辅助数组
+            var n = list.Count;
+            List<int> temp = new List<int>(n);
+            //记录对应位置的数量
+            List<int> cnt = new List<int>(baseNumber);
+            //初始化对应位置的数量记录数组
+            for (int s = 0; s < baseNumber; s++)
+            {
+                cnt.Add(0);
+            }
+            //初始化辅助数组
+            for (int t = 0; t < n; t++)
+            {
+                temp.Add(0);
+            }
+            for (int i = 0, rtok = 1; i < bitWidth; i++, rtok = rtok * baseNumber)
+            {
+                //初始化
+                for (int j = 0; j < baseNumber; j++)
+                {
+                    cnt[j] = 0;
+                }
+
+                //计算每个箱子的数字个数
+                for (int j = 0; j < n; j++)
+                {
+                    cnt[(list[j] / rtok) % baseNumber]++;
+                }
+                //cnt[j]的个数修改未前j个箱子一共有几个待排数字
+                for (int j = 1; j < baseNumber; j++)
+                {
+                    cnt[j] = cnt[j - 1] + cnt[j];
+                }
+                //将数字置于辅助数组中的本趟位置
+                for (int j = n - 1; j >= 0; j--)
+                {
+                    //数字个数减一
+                    cnt[(list[j] / rtok) % baseNumber]--;
+                    //对应位置的数字归位
+                    temp[cnt[(list[j] / rtok) % baseNumber]] = list[j];
+                }
+                //修正本次排序结果到list中
+                for (int j = 0; j < n; j++)
+                {
+                    list[j] = temp[j];
+                }
+            }
+            return list;
         }
         #endregion
     }
