@@ -27,9 +27,9 @@ namespace FreshManBasicDiamondTest
                     for (int i = 0; i < 10; i++)
                     {
                         var testwatch = Stopwatch.StartNew();
-                    Console.Write("Running\t" + method.Name + "\tin FreshCommonUtilityNetTest:");
-                    method.Invoke(pgtester, null);
-                    Console.WriteLine("\t- OK! \t{0}ms", testwatch.Elapsed);
+                        Console.Write("Running\t" + method.Name + "\tin FreshCommonUtilityNetTest:");
+                        method.Invoke(pgtester, null);
+                        Console.WriteLine("\t- OK! \t{0} Elaps", testwatch.ElapsedTicks);
                     }
                 }
 
