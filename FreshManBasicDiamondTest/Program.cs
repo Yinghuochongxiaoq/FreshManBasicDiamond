@@ -29,7 +29,7 @@ namespace FreshManBasicDiamondTest
                     var testwatch = Stopwatch.StartNew();
                     Console.Write("Running\t" + method.Name + "\tin FreshCommonUtilityNetTest:");
                     method.Invoke(pgtester, null);
-                    Console.WriteLine("\t- OK! \t{0}ms", testwatch.ElapsedMilliseconds);
+                    Console.WriteLine("\t- OK! \t{0}ms", testwatch.Elapsed);
                     //}
                 }
 

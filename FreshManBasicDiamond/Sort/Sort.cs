@@ -163,12 +163,12 @@ namespace FreshManBasicDiamond.Sort
             T temp = list[low];
             while (low < high)
             {
-                while (low < high && list[high].CompareTo(temp) == 1)
+                while (low < high && list[high].CompareTo(temp) != -1)
                 {
                     high--;
                 }
                 list[low] = list[high];
-                while (low < high && list[low].CompareTo(temp) == -1)
+                while (low < high && list[low].CompareTo(temp) != 1)
                 {
                     low++;
                 }
@@ -334,7 +334,7 @@ namespace FreshManBasicDiamond.Sort
             }
             while (highMiddle <= high)
             {
-                result[k] = result[highMiddle];
+                result[k] = list[highMiddle];
                 k++;
                 highMiddle++;
             }
