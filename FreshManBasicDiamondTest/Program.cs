@@ -24,13 +24,13 @@ namespace FreshManBasicDiamondTest
                 var pgtester = Activator.CreateInstance(type);
                 foreach (var method in type.GetMethods(BindingFlags.Public | BindingFlags.Instance | BindingFlags.DeclaredOnly | BindingFlags.GetProperty).Where(f => !f.Name.Contains("get_")))
                 {
-                    //for (int i = 0; i < 10; i++)
-                    //{
-                    var testwatch = Stopwatch.StartNew();
+                    for (int i = 0; i < 10; i++)
+                    {
+                        var testwatch = Stopwatch.StartNew();
                     Console.Write("Running\t" + method.Name + "\tin FreshCommonUtilityNetTest:");
                     method.Invoke(pgtester, null);
                     Console.WriteLine("\t- OK! \t{0}ms", testwatch.Elapsed);
-                    //}
+                    }
                 }
 
             }

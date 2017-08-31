@@ -1,5 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
+using FreshManBasicDiamond;
 using FreshManBasicDiamond.Sort;
 
 namespace FreshManBasicDiamondTest.SortTest
@@ -115,6 +118,30 @@ namespace FreshManBasicDiamondTest.SortTest
             var list = SortData;
             var sortList = Sort.RadixSort(list, 5, 10);
             sortList[2206].IsEqualTo(1175);
+        }
+
+        /// <summary>
+        /// 插入查找
+        /// </summary>
+        public void InsertionSearchTest()
+        {
+            var list = SortData;
+            var sortList = Sort.MaxHeapSort(list);
+            sortList[2206].IsEqualTo(1175);
+            var indexNumber = new Search().InsertionSearch(sortList, 1175);
+            indexNumber.IsEqualTo(2206);
+        }
+
+        /// <summary>
+        /// 二分查找
+        /// </summary>
+        public void BinarySearchTest()
+        {
+            var list = SortData;
+            var sortList = Sort.MaxHeapSort(list);
+            sortList[2206].IsEqualTo(1175);
+            var indexNumber = new Search().BinarySearch(sortList, 1175);
+            indexNumber.IsEqualTo(2206);
         }
     }
 }

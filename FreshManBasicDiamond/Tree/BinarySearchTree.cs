@@ -39,9 +39,8 @@ namespace FreshManBasicDiamond.Tree
         /// <summary>
         /// 显示数据
         /// </summary>
-        public int DisplayData()
+        public virtual int DisplayData()
         {
-            Debug.Write(Data + " BF:" + Bf + " \t");
             return Data;
         }
     }
@@ -50,7 +49,8 @@ namespace FreshManBasicDiamond.Tree
     /// 平衡二叉树
     /// </summary>
     public class BinarySearchTree
-    {   /// <summary>
+    {
+        /// <summary>
         /// 成员变量头指针
         /// </summary>
         public Node Head;
@@ -293,7 +293,13 @@ namespace FreshManBasicDiamond.Tree
             }
             return tallChange;
         }
-        //root为旋转根，rootPrev为旋转根双亲结点
+
+        /// <summary>
+        /// LL型旋转，返回旋转后的新子树根
+        /// root为旋转根，rootPrev为旋转根双亲结点
+        /// </summary>
+        /// <param name="root"></param>
+        /// <returns></returns>
         private Node LL(Node root) //LL型旋转，返回旋转后的新子树根
         {
             Node rootNext = root.Left;
@@ -311,6 +317,12 @@ namespace FreshManBasicDiamond.Tree
             }
             return rootNext; //rootNext为新子树的根
         }
+
+        /// <summary>
+        /// LR型旋转，返回旋转后的新子树根
+        /// </summary>
+        /// <param name="root"></param>
+        /// <returns></returns>
         private Node LR(Node root) //LR型旋转，返回旋转后的新子树根
         {
             Node rootNext = root.Left;
@@ -337,6 +349,12 @@ namespace FreshManBasicDiamond.Tree
             newRoot.Bf = 0;
             return newRoot; //newRoot为新子树的根
         }
+
+        /// <summary>
+        /// RR型旋转，返回旋转后的新子树根
+        /// </summary>
+        /// <param name="root"></param>
+        /// <returns></returns>
         private Node RR(Node root) //RR型旋转，返回旋转后的新子树根
         {
             Node rootNext = root.Right;
@@ -354,6 +372,12 @@ namespace FreshManBasicDiamond.Tree
             }
             return rootNext; //rootNext为新子树的根
         }
+
+        /// <summary>
+        /// RL型旋转，返回旋转后的新子树根
+        /// </summary>
+        /// <param name="root"></param>
+        /// <returns></returns>
         private Node RL(Node root) //RL型旋转，返回旋转后的新子树根
         {
             Node rootNext = root.Right;
